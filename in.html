@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حملة تبرع لشراء iPhone 17 Pro Max | Donation Campaign for iPhone 17 Pro Max</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .lang-select {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .lang-select:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .lang-select option {
+            background: #667eea;
+            color: white;
+        }
+        .phone-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .title {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .description {
+            color: #f0f0f0;
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        .donation-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .donation-btn {
+            width: 90px;
+            height: 90px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .donation-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .donation-btn img {
+            width: 50px;
+            height: 50px;
+        }
+        /* ألوان مخصصة لكل زر */
+        .btc-btn { background: linear-gradient(45deg, #f7931a, #ffbf00); }
+        .eth-btn { background: linear-gradient(45deg, #627eea, #8f9cff); }
+        .sol-btn { background: linear-gradient(45deg, #9945ff, #14f195); }
+        .usdt-btn { background: linear-gradient(45deg, #26a17b, #00d4aa); }
+        .paypal-btn { background: linear-gradient(45deg, #003087, #0070ba); }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 15% auto;
+            padding: 30px;
+            border: none;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+        .close {
+            color: #fff;
+            float: left;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .close:hover {
+            color: #f0f0f0;
+        }
+        .account-info {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #f0f0f0;
+            word-break: break-all;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .account-info:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .placeholder {
+            color: #ccc;
+            font-style: italic;
+        }
+        /* للإنجليزية */
+        [lang="en"] {
+            dir: ltr;
+            text-align: left;
+        }
+        [lang="en"] .container {
+            text-align: center; /* الحفاظ على التركيز في الوسط */
+        }
+        [lang="en"] .close {
+            float: right;
+        }
+        [lang="en"] .lang-select {
+            left: auto;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <select class="lang-select" id="langSelect" onchange="changeLanguage()">
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+    </select>
+    
+    <div class="container">
+        <h1 class="title" id="title">حملة تبرع لشراء هاتف أحلامي: iPhone 17 Pro Max</h1>
+        <p class="description" id="description">أحلم بشراء iPhone 17 Pro Max، ساعدوني في تحقيق حلمي من خلال التبرع عبر العملات المشفرة أو PayPal. شكرًا لكم!</p>
+        
+        <img src="https://via.placeholder.com/400x800?text=iPhone+17+Pro+Max" alt="iPhone 17 Pro Max" class="phone-image">
+        <!-- استبدل الرابط برابط صورة حقيقي -->
+        
+        <h2 id="donationTitle">اختر طريقة التبرع:</h2>
+        <div class="donation-section">
+            <button class="donation-btn btc-btn" onclick="showModal('btc')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/128px-Bitcoin.svg.png" alt="BTC">
+            </button>
+            <button class="donation-btn eth-btn" onclick="showModal('eth')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/128px-Ethereum-icon-purple.svg.png" alt="ETH">
+            </button>
+            <button class="donation-btn sol-btn" onclick="showModal('sol')">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/Solana_logo.png/128px-Solana_logo.png" alt="Solana">
+            </button>
+            <button class="donation-btn usdt-btn" onclick="showModal('usdt')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tether_USDT_logo.svg/128px-Tether_USDT_logo.svg.png" alt="USDT">
+            </button>
+            <button class="donation-btn paypal-btn" onclick="showModal('paypal')">
+                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP-logo-hc-200x51.png" alt="PayPal" style="width: 60px; height: 40px; margin-top: 10px;">
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">معلومات الحساب</h3>
+            <p id="modalDescription">انسخ هذا الرابط أو الحساب وأرسل التبرع:</p>
+            <div id="accountInfo" class="account-info" onclick="copyToClipboard()">انقر للنسخ</div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = localStorage.getItem('selectedLang') || 'ar'; // تحميل اللغة المحفوظة أو العربية افتراضيًا
+        
+        const translations = {
+            ar: {
+                title: 'حملة تبرع لشراء هاتف أحلامي: iPhone 17 Pro Max',
+                description: 'أحلم بشراء iPhone 17 Pro Max، ساعدوني في تحقيق حلمي من خلال التبرع عبر العملات المشفرة أو PayPal. شكرًا لكم!',
+                donationTitle: 'اختر طريقة التبرع:',
+                modalTitle: 'معلومات الحساب',
+                modalDescription: 'انسخ هذا الرابط أو الحساب وأرسل التبرع:',
+                btcTitle: 'حساب Bitcoin (BTC)',
+                ethTitle: 'حساب Ethereum (ETH)',
+                solTitle: 'حساب Solana (SOL)',
+                usdtTitle: 'حساب USDT (Tether) - شبكة ETH',
+                paypalTitle: 'حساب PayPal'
+            },
+            en: {
+                title: 'Donation Campaign to Buy My Dream Phone: iPhone 17 Pro Max',
+                description: 'I dream of buying an iPhone 17 Pro Max, help me achieve my dream by donating via cryptocurrencies or PayPal. Thank you!',
+                donationTitle: 'Choose Donation Method:',
+                modalTitle: 'Account Information',
+                modalDescription: 'Copy this link or account and send the donation:',
+                btcTitle: 'Bitcoin (BTC) Account',
+                ethTitle: 'Ethereum (ETH) Account',
+                solTitle: 'Solana (SOL) Account',
+                usdtTitle: 'USDT (Tether) Account - ETH Network',
+                paypalTitle: 'PayPal Account'
+            }
+        };
+        
+        function changeLanguage() {
+            const select = document.getElementById('langSelect');
+            currentLang = select.value;
+            localStorage.setItem('selectedLang', currentLang); // حفظ الاختيار
+            
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // تحديث النصوص
+            document.getElementById('title').textContent = translations[currentLang].title;
+            document.getElementById('description').textContent = translations[currentLang].description;
+            document.getElementById('donationTitle').textContent = translations[currentLang].donationTitle;
+        }
+        
+        // تهيئة اللغة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('langSelect');
+            select.value = currentLang;
+            changeLanguage(); // تطبيق اللغة الافتراضية
+        });
+        
+        function showModal(type) {
+            const modal = document.getElementById('donationModal');
+            const title = document.getElementById('modalTitle');
+            const desc = document.getElementById('modalDescription');
+            const info = document.getElementById('accountInfo');
+            
+            let titleText = '';
+            let infoText = '';
+            
+            switch(type) {
+                case 'btc':
+                    titleText = translations[currentLang].btcTitle;
+                    infoText = 'bc1qtjvl0xmdyxrkhgaz2kwx3wr69dn2yzz7e60v0s';
+                    break;
+                case 'eth':
+                    titleText = translations[currentLang].ethTitle;
+                    infoText = '0x8306aE556b6f2D0d4988911B5B18b2F9B501e95a';
+                    break;
+                case 'sol':
+                    titleText = translations[currentLang].solTitle;
+                    infoText = 'FJLGniHG39J5CfzuXukYYbDuhMcLjGzaKvZv8axVN83b';
+                    break;
+                case 'usdt':
+                    titleText = translations[currentLang].usdtTitle;
+                    infoText = '0x8306aE556b6f2D0d4988911B5B18b2F9B501e95a (شبكة ETH)';
+                    break;
+                case 'paypal':
+                    titleText = translations[currentLang].paypalTitle;
+                    infoText = 'aoubayoub16@gmail.com';
+                    break;
+            }
+            
+            title.innerHTML = titleText;
+            desc.innerHTML = translations[currentLang].modalDescription;
+            info.innerHTML = infoText;
+            modal.style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('donationModal').style.display = 'none';
+        }
+        
+        // دالة لنسخ النص إلى الحافظة
+        function copyToClipboard() {
+            const info = document.getElementById('accountInfo');
+            navigator.clipboard.writeText(info.textContent).then(function() {
+                // تغيير النص مؤقتًا لإظهار النجاح
+                const originalText = info.textContent;
+                info.textContent = 'تم النسخ! (Copied!)';
+                setTimeout(() => {
+                    info.textContent = originalText;
+                }, 2000);
+            }).catch(function(err) {
+                console.error('فشل في النسخ: ', err);
+            });
+        }
+        
+        // إغلاق عند الضغط خارج المودال
+        window.onclick = function(event) {
+            const modal = document.getElementById('donationModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
